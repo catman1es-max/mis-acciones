@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Mis Acciones</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div><div class="eyebrow">CARTERA</div><h1>Mis Acciones</h1></div>
+  <button id="addBtn" class="circle">＋</button>
+</header>
+
+<main>
+<section class="hero card">
+  <span>Valor de cartera</span>
+  <strong id="portfolioValue">0,00 €</strong>
+  <div class="heroRow"><span>Invertido</span><b id="invested">0,00 €</b></div>
+  <div class="heroRow"><span>Beneficio / pérdida</span><b id="pnl">0,00 €</b></div>
+</section>
+
+<section class="stats">
+ <div class="card"><span>Rentabilidad</span><b id="return">0,00 %</b></div>
+ <div class="card"><span>Comisiones</span><b id="fees">0,00 €</b></div>
+</section>
+
+<section>
+ <div class="sectionTitle"><h2>Mi cartera</h2><button id="refreshBtn">Actualizar</button></div>
+ <div id="holdings"></div>
+</section>
+
+<section>
+ <div class="sectionTitle"><h2>Operaciones</h2></div>
+ <div id="operations"></div>
+</section>
+</main>
+
+<div id="modal" class="modal hidden">
+ <div class="sheet">
+  <div class="sheetHead"><h2>Nueva operación</h2><button id="closeBtn">✕</button></div>
+  <div class="seg"><button data-type="buy" class="active">Compra</button><button data-type="sell">Venta</button></div>
+  <label>Ticker<input id="ticker" placeholder="Ej. ORCL" autocapitalize="characters"></label>
+  <label>Empresa<input id="company" placeholder="Oracle"></label>
+  <div class="two"><label>Acciones<input id="shares" type="number" step="any"></label><label>Precio<input id="price" type="number" step="any"></label></div>
+  <div class="two"><label>Comisión<input id="fee" type="number" step="any" value="0"></label><label>Moneda<select id="currency"><option>EUR</option><option>USD</option><option>GBP</option></select></label></div>
+  <label>Fecha<input id="date" type="date"></label>
+  <button id="saveBtn" class="primary">Guardar operación</button>
+ </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
