@@ -3,55 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111827">
+<meta name="theme-color" content="#0f172a">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Mis Acciones</title>
+<meta name="apple-mobile-web-app-title" content="Mis Acciones">
 <link rel="manifest" href="manifest.json">
-<link rel="stylesheet" href="styles.css">
+<title>Mis Acciones V3</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;background:#f4f6f8;color:#111827;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}body{padding-bottom:30px}button,input,select{font:inherit}button{cursor:pointer;border:0}.wrap{max-width:760px;margin:auto;padding:env(safe-area-inset-top) 16px 24px}.top{display:flex;justify-content:space-between;align-items:center;padding:20px 0 14px}.eyebrow{font-size:11px;font-weight:800;letter-spacing:1.5px;color:#64748b}.top h1{margin:2px 0 0;font-size:28px}.add{width:48px;height:48px;border-radius:50%;font-size:28px;background:#111827;color:white;box-shadow:0 6px 16px #0002}.card{background:white;border-radius:18px;padding:18px;box-shadow:0 2px 12px #0000000b;margin-bottom:12px}.hero{background:#111827;color:white}.hero small{color:#cbd5e1}.hero .value{display:block;font-size:34px;font-weight:800;margin:5px 0 18px}.row{display:flex;justify-content:space-between;padding-top:11px;margin-top:11px;border-top:1px solid #ffffff22}.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}.label{font-size:13px;color:#64748b}.stat b{display:block;font-size:20px;margin-top:5px}.gain{color:#15803d!important}.loss{color:#b91c1c!important}.sectionHead{display:flex;align-items:center;justify-content:space-between;margin:24px 2px 10px}.sectionHead h2{font-size:19px;margin:0}.link{background:none;color:#2563eb;font-weight:700;padding:6px}.holding,.op{display:flex;justify-content:space-between;align-items:center;gap:10px;background:white;border-radius:16px;padding:15px;margin-bottom:9px;box-shadow:0 2px 10px #00000008}.ticker{font-weight:800;font-size:16px}.sub{font-size:12px;color:#64748b;margin-top:3px}.right{text-align:right}.pill{font-size:11px;font-weight:800;padding:4px 7px;border-radius:8px;background:#e2e8f0;color:#334155}.empty{text-align:center;background:white;border-radius:16px;padding:24px;color:#64748b}.modal{position:fixed;inset:0;background:#0007;display:flex;align-items:flex-end;z-index:10}.hidden{display:none}.sheet{background:#f8fafc;width:100%;max-height:92vh;overflow:auto;border-radius:24px 24px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom));box-shadow:0 -10px 35px #0003}.sheetHead{display:flex;justify-content:space-between;align-items:center}.sheetHead h2{margin:0 0 14px}.close{background:#e2e8f0;width:36px;height:36px;border-radius:50%;font-size:18px}.seg{display:grid;grid-template-columns:1fr 1fr;background:#e2e8f0;border-radius:12px;padding:3px;margin-bottom:15px}.seg button{padding:10px;border-radius:9px;background:transparent;font-weight:700}.seg .active{background:white;box-shadow:0 1px 4px #0002}.field{display:block;font-size:13px;font-weight:700;margin:12px 0}.field input,.field select{display:block;width:100%;margin-top:6px;padding:12px;border:1px solid #cbd5e1;border-radius:11px;background:white;outline:none}.field input:focus,.field select:focus{border-color:#2563eb}.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}.primary{width:100%;padding:14px;border-radius:12px;background:#111827;color:white;font-weight:800;margin-top:8px}.danger{background:#fee2e2;color:#b91c1c;padding:8px 10px;border-radius:9px;font-size:12px;font-weight:700}.secondary{width:100%;padding:12px;border-radius:12px;background:#e2e8f0;color:#0f172a;font-weight:700;margin-top:8px}.notice{font-size:12px;color:#64748b;background:#eef2ff;padding:10px;border-radius:10px;margin-top:10px}.actions{display:flex;gap:8px;margin-top:8px}.actions button{flex:1}.mini{font-size:12px;color:#475569}.fileInput{display:none}
+</style>
 </head>
 <body>
-<header>
-  <div><div class="eyebrow">CARTERA</div><h1>Mis Acciones</h1></div>
-  <button id="addBtn" class="circle">＋</button>
-</header>
-
-<main>
-<section class="hero card">
-  <span>Valor de cartera</span>
-  <strong id="portfolioValue">0,00 €</strong>
-  <div class="heroRow"><span>Invertido</span><b id="invested">0,00 €</b></div>
-  <div class="heroRow"><span>Beneficio / pérdida</span><b id="pnl">0,00 €</b></div>
-</section>
-
-<section class="stats">
- <div class="card"><span>Rentabilidad</span><b id="return">0,00 %</b></div>
- <div class="card"><span>Comisiones</span><b id="fees">0,00 €</b></div>
-</section>
-
-<section>
- <div class="sectionTitle"><h2>Mi cartera</h2><button id="refreshBtn">Actualizar</button></div>
- <div id="holdings"></div>
-</section>
-
-<section>
- <div class="sectionTitle"><h2>Operaciones</h2></div>
- <div id="operations"></div>
-</section>
-</main>
-
-<div id="modal" class="modal hidden">
- <div class="sheet">
-  <div class="sheetHead"><h2>Nueva operación</h2><button id="closeBtn">✕</button></div>
-  <div class="seg"><button data-type="buy" class="active">Compra</button><button data-type="sell">Venta</button></div>
-  <label>Ticker<input id="ticker" placeholder="Ej. ORCL" autocapitalize="characters"></label>
-  <label>Empresa<input id="company" placeholder="Oracle"></label>
-  <div class="two"><label>Acciones<input id="shares" type="number" step="any"></label><label>Precio<input id="price" type="number" step="any"></label></div>
-  <div class="two"><label>Comisión<input id="fee" type="number" step="any" value="0"></label><label>Moneda<select id="currency"><option>EUR</option><option>USD</option><option>GBP</option></select></label></div>
-  <label>Fecha<input id="date" type="date"></label>
-  <button id="saveBtn" class="primary">Guardar operación</button>
- </div>
+<div class="wrap">
+  <header class="top"><div><div class="eyebrow">CARTERA</div><h1>Mis Acciones</h1></div><button class="add" id="addBtn" aria-label="Añadir operación">＋</button></header>
+  <section class="card hero"><small>Valor de cartera</small><span class="value" id="portfolioValue">0,00 €</span><div class="row"><span>Invertido actual</span><b id="invested">0,00 €</b></div><div class="row"><span>Beneficio / pérdida</span><b id="pnl">0,00 €</b></div></section>
+  <section class="stats"><div class="card stat"><span class="label">Rentabilidad</span><b id="return">0,00 %</b></div><div class="card stat"><span class="label">Comisiones</span><b id="fees">0,00 €</b></div></section>
+  <div class="sectionHead"><h2>Mi cartera</h2><button class="link" id="refreshBtn">Actualizar</button></div><div id="holdings"></div>
+  <div class="sectionHead"><h2>Operaciones</h2><button class="link" id="exportBtn">Exportar</button></div><div id="operations"></div>
+  <div class="sectionHead"><h2>Datos</h2><button class="link" id="importBtn">Importar</button></div>
+  <div class="card"><div class="mini">Los datos se guardan en este iPhone mediante almacenamiento local. La aplicación no envía tus operaciones a GitHub.</div><div class="actions"><button class="secondary" id="clearBtn">Borrar todas las operaciones</button></div><input class="fileInput" id="fileInput" type="file" accept="application/json"></div>
 </div>
-<script src="app.js"></script>
-</body>
-</html>
+
+<div class="modal hidden" id="modal"><div class="sheet">
+  <div class="sheetHead"><h2>Nueva operación</h2><button class="close" id="closeBtn">✕</button></div>
+  <div class="seg"><button data-type="buy" class="active">Compra</button><button data-type="sell">Venta</button></div>
+  <label class="field">Ticker<input id="ticker" placeholder="Ej. ORCL" autocapitalize="characters" autocomplete="off"></label>
+  <label class="field">Empresa<input id="company" placeholder="Oracle" autocomplete="off"></label>
+  <div class="two"><label class="field">Acciones<input id="shares" type="number" step="any" min="0" inputmode="decimal" placeholder="1"></label><label class="field">Precio por acción<input id="price" type="number" step="any" min="0" inputmode="decimal" placeholder="100"></label></div>
+  <div class="two"><label class="field">Comisión<input id="fee" type="number" step="any" min="0" inputmode="decimal" value="0"></label><label class="field">Moneda<select id="currency"><option>EUR</option><option>USD</option><option>GBP</option></select></label></div>
+  <label class="field">Fecha<input id="date" type="date"></label>
+  <button class="primary" id="saveBtn">Guardar operación</button>
+  <button class="secondary" id="cancelBtn">Cancelar</button>
+  <div class="notice">Para calcular correctamente la cartera, introduce las compras y ventas. El precio actual de cada acción se puede cambiar desde “Actualizar precio” en la cartera.</div>
+</div></div>
+
+<div class="modal hidden" id="priceModal"><div class="sheet">
+  <div class="sheetHead"><h2>Actualizar precio</h2><button class="close" id="priceClose">✕</button></div>
+  <p id="priceTitle" class="mini"></p>
+  <label class="field">Precio actual<input id="currentPrice" type="number" step="any" min="0" inputmode="decimal"></label>
+  <button class="primary" id="savePrice">Guardar precio</button>
+</div></div>
+
+<script>
+(function(){
+'use strict';
+const KEY='misAccionesOpsV3', PRICEKEY='misAccionesPricesV3';
+let ops=[], prices={}, type='buy', priceTicker='';
+const $=id=>document.getElementById(id);
+const euro=n=>new Intl.NumberFormat('es-ES',{style:'currency',currency:'EUR'}).format(Number(n)||0);
+const money=(n,c)=>new Intl.NumberFormat('es-ES',{style:'currency',currency:c||'EUR',maximumFractionDigits:2}).format(Number(n)||0);
+const val=id=>Number.parseFloat($(id).value)||0;
+function load(){try{ops=JSON.parse(localStorage.getItem(KEY)||'[]');prices=JSON.parse(localStorage.getItem(PRICEKEY)||'{}');if(!Array.isArray(ops))ops=[];if(!prices||typeof prices!=='object')prices={}}catch(e){ops=[];prices={}}}
+function persist(){localStorage.setItem(KEY,JSON.stringify(ops));localStorage.setItem(PRICEKEY,JSON.stringify(prices))}
+function holdings(){
+ const m={};
+ for(const o of ops){const t=o.ticker.toUpperCase();if(!m[t])m[t]={ticker:t,company:o.company||t,shares:0,cost:0,fees:0,last:o.price,currency:o.currency||'EUR',realized:0};
+  const x=m[t]; if(o.type==='buy'){x.shares+=o.shares;x.cost+=o.shares*o.price+o.fee;x.fees+=o.fee;x.last=o.price;x.currency=o.currency||x.currency}
+  else {const avg=x.shares>0?x.cost/x.shares:0; x.realized+=(o.price-avg)*o.shares-o.fee;x.shares-=o.shares;x.cost-=avg*o.shares;x.fees+=o.fee;x.last=o.price;x.currency=o.currency||x.currency}
+ }
+ return Object.values(m).filter(x=>x.shares>0.0000001).map(x=>{x.current=prices[x.ticker]!==undefined?Number(prices[x.ticker]):x.last;x.value=x.shares*x.current;x.unrealized=x.value-x.cost;return x});
+}
+function render(){
+ const hs=holdings();
+ let totalValue=0,totalCost=0,totalFees=0,realized=0;
+ for(const x of hs){totalValue+=x.value;totalCost+=x.cost;totalFees+=x.fees;realized+=x.realized}
+ for(const o of ops) if(o.type==='buy') totalFees+=0; // fees already included in holding costs
+ // include fees from closed positions / all operations for display
+ totalFees=ops.reduce((s,o)=>s+o.fee,0);
+ const pnl=hs.reduce((s,x)=>s+x.unrealized,0)+ops.filter(o=>o.type==='sell').reduce((s,o)=>s+(o.shares*o.price-o.fee),0)-ops.filter(o=>o.type==='sell').reduce((s,o)=>s+(o.shares*(o._avg||0)),0);
+ // More stable overall estimate: current value + cash received from sales - total cash paid for buys.
+ const buys=ops.filter(o=>o.type==='buy').reduce((s,o)=>s+o.shares*o.price+o.fee,0);
+ const sells=ops.filter(o=>o.type==='sell').reduce((s,o)=>s+o.shares*o.price-o.fee,0);
+ const netPnl=totalValue+sells-buys;
+ $('portfolioValue').textContent=euro(totalValue);$('invested').textContent=euro(Math.max(0,buys-sells));$('pnl').textContent=euro(netPnl);$('return').textContent=(buys?((netPnl/buys)*100:0).toFixed(2):'0.00')+' %';$('fees').textContent=euro(totalFees);
+ $('pnl').className=netPnl>=0?'gain':'loss';$('return').className=netPnl>=0?'gain':'loss';
+ $('holdings').innerHTML=hs.length?hs.map(x=>`<div class="holding"><div><div class="ticker">${esc(x.ticker)}</div><div class="sub">${esc(x.company)} · ${fmtNum(x.shares)} títulos</div></div><div class="right"><b>${money(x.value,x.currency)}</b><div class="sub">Actual: ${money(x.current,x.currency)}</div><div class="sub ${x.unrealized>=0?'gain':'loss'}">${x.unrealized>=0?'+':''}${money(x.unrealized,x.currency)}</div><button class="link" onclick="window.openPrice('${escAttr(x.ticker)}','${escAttr(x.company)}')">Actualizar precio</button></div></div>`).join(''):'<div class="empty">No tienes posiciones. Pulsa ＋ para añadir tu primera compra.</div>';
+ $('operations').innerHTML=ops.length?[...ops].sort((a,b)=>b.date.localeCompare(a.date)).map(o=>`<div class="op"><div><div class="ticker"><span class="pill">${o.type==='buy'?'COMPRA':'VENTA'}</span> ${esc(o.ticker)}</div><div class="sub">${esc(o.date)} · ${fmtNum(o.shares)} títulos · ${money(o.price,o.currency)}</div></div><div class="right"><b>${money(o.shares*o.price,o.currency)}</b><div class="sub">Comisión ${money(o.fee,o.currency)}</div></div></div>`).join(''):'<div class="empty">Todavía no hay operaciones.</div>';
+}
+function fmtNum(n){return Number(n).toLocaleString('es-ES',{maximumFractionDigits:6})}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function escAttr(s){return String(s??'').replace(/\\/g,'\\\\').replace(/'/g,"\\'")}
+function openModal(){type='buy';document.querySelectorAll('.seg button').forEach(b=>b.classList.toggle('active',b.dataset.type==='buy'));$('modal').classList.remove('hidden');$('date').value=new Date().toISOString().slice(0,10);$('ticker').focus()}
+function closeModal(){$('modal').classList.add('hidden')}
+function clearForm(){['ticker','company','shares','price'].forEach(id=>$(id).value='');$('fee').value='0'}
+function saveOp(){
+ const ticker=$('ticker').value.trim().toUpperCase(),company=$('company').value.trim(),shares=val('shares'),price=val('price'),fee=val('fee'),currency=$('currency').value,date=$('date').value;
+ if(!ticker||shares<=0||price<=0||!date){alert('Completa ticker, acciones, precio y fecha.');return}
+ if(type==='sell'){const owned=holdings().find(x=>x.ticker===ticker)?.shares||0;if(shares>owned+1e-9){alert('No puedes vender '+fmtNum(shares)+' títulos de '+ticker+'. Solo tienes '+fmtNum(owned)+'.');return}}
+ ops.push({id:(crypto.randomUUID?crypto.randomUUID():Date.now()+Math.random()),type,date,ticker,company:company||ticker,shares,price,fee,currency});
+ if(prices[ticker]===undefined)prices[ticker]=price;
+ persist();closeModal();clearForm();render();
+}
+window.openPrice=function(t,c){priceTicker=t;$('priceTitle').textContent=c+' ('+t+')';$('currentPrice').value=prices[t]??(holdings().find(x=>x.ticker===t)?.last||'');$('priceModal').classList.remove('hidden');$('currentPrice').focus()};
+$('savePrice').onclick=function(){const p=val('currentPrice');if(p<=0){alert('Introduce un precio válido.');return}prices[priceTicker]=p;persist();$('priceModal').classList.add('hidden');render()};
+$('priceClose').onclick=()=>$('priceModal').classList.add('hidden');
+$('addBtn').onclick=openModal;$('closeBtn').onclick=closeModal;$('cancelBtn').onclick=closeModal;$('refreshBtn').onclick=render;
+document.querySelectorAll('.seg button').forEach(b=>b.onclick=()=>{type=b.dataset.type;document.querySelectorAll('.seg button').forEach(x=>x.classList.toggle('active',x===b))});
+$('saveBtn').onclick=saveOp;
+$('clearBtn').onclick=()=>{if(confirm('¿Borrar todas las operaciones y precios guardados en este iPhone?')){ops=[];prices={};persist();render()}};
+$('exportBtn').onclick=()=>{const blob=new Blob([JSON.stringify({version:3,ops,prices},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='mis-acciones-backup.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+$('importBtn').onclick=()=>$('fileInput').click();
+$('fileInput').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const d=JSON.parse(await f.text());if(!Array.isArray(d.ops))throw new Error();ops=d.ops;prices=d.prices||{};persist();render();alert('Datos importados correctamente.')}catch(err){alert('No se ha podido importar el archivo.')}e.target.value=''};
+$('modal').addEventListener('click',e=>{if(e.target===$('modal'))closeModal()});$('priceModal').addEventListener('click',e=>{if(e.target===$('priceModal'))$('priceModal').classList.add('hidden')});
+load();render();
+})();
+</script>
+</body></html>

@@ -1,1 +1,9 @@
-{"name":"Mis Acciones","short_name":"Acciones","start_url":"./index.html","display":"standalone","background_color":"#f3f4f6","theme_color":"#111827","icons":[]}
+{
+  "name": "Mis Acciones V3",
+  "short_name": "Mis Acciones",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f6f8",
+  "theme_color": "#0f172a",
+  "lang": "es"
+}
