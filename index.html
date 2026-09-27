@@ -66,4 +66,9 @@ $('alertSave').onclick=async()=>{let ticker=$('alertTicker').value.trim().toUppe
 $('saveApi').onclick=async()=>{apiBase=$('apiBase').value.trim().replace(/\/$/,'');localStorage.setItem('misAccionesApiBaseV3',apiBase);toast('✓ Servidor guardado');if(apiBase){await loadCloudAlerts();alerts.filter(a=>a.active!==false).forEach(a=>checkAlert(a.id,false))}};
 
 get().then(async x=>{ops=x;render();$('storageStatus').textContent='✓ Almacenamiento preparado en este iPhone';$('storageStatus').className='status ok';if(apiBase)await loadCloudAlerts()});
-})()</script></body></html>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js")
+    .then(() => console.log("Service Worker registrado"))
+    .catch(err => console.error("Error Service Worker:", err));
+}
+     })()</script></body></html>
